@@ -1,0 +1,501 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 53;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		"TwitterApacheThrift::TwitterApacheThriftPackageTests::ProductTarget" /* TwitterApacheThriftPackageTests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = OBJ_63 /* Build configuration list for PBXAggregateTarget "TwitterApacheThriftPackageTests" */;
+			buildPhases = (
+			);
+			dependencies = (
+				OBJ_66 /* PBXTargetDependency */,
+			);
+			name = TwitterApacheThriftPackageTests;
+			productName = TwitterApacheThriftPackageTests;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		OBJ_47 /* BinaryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* BinaryProtocol.swift */; };
+		OBJ_48 /* MemoryBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* MemoryBuffer.swift */; };
+		OBJ_49 /* MutableBinaryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* MutableBinaryProtocol.swift */; };
+		OBJ_50 /* PreencodedContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* PreencodedContainer.swift */; };
+		OBJ_51 /* ThriftCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* ThriftCodable.swift */; };
+		OBJ_52 /* ThriftDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* ThriftDecoder.swift */; };
+		OBJ_53 /* ThriftEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* ThriftEncoder.swift */; };
+		OBJ_54 /* ThriftType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* ThriftType.swift */; };
+		OBJ_61 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_72 /* CollectiontThriftStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* CollectiontThriftStruct.swift */; };
+		OBJ_73 /* EnumStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* EnumStruct.swift */; };
+		OBJ_74 /* FoundationThriftStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* FoundationThriftStruct.swift */; };
+		OBJ_75 /* MyUnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* MyUnion.swift */; };
+		OBJ_76 /* OptionalThriftStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* OptionalThriftStruct.swift */; };
+		OBJ_77 /* SomeEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* SomeEnum.swift */; };
+		OBJ_78 /* SubobjectThriftStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* SubobjectThriftStruct.swift */; };
+		OBJ_79 /* UnionClassA.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* UnionClassA.swift */; };
+		OBJ_80 /* UnionClassB.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* UnionClassB.swift */; };
+		OBJ_81 /* UnionStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* UnionStruct.swift */; };
+		OBJ_82 /* BinaryProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* BinaryProtocolTests.swift */; };
+		OBJ_83 /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* Fixtures.swift */; };
+		OBJ_84 /* MutableBinaryProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* MutableBinaryProtocolTests.swift */; };
+		OBJ_85 /* PreencodedContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* PreencodedContainerTests.swift */; };
+		OBJ_86 /* ThriftDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* ThriftDecodingTests.swift */; };
+		OBJ_87 /* ThriftEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* ThriftEncoderTests.swift */; };
+		OBJ_88 /* XCTestManifests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* XCTestManifests.swift */; };
+		OBJ_90 /* TwitterApacheThrift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "TwitterApacheThrift::TwitterApacheThrift::Product" /* TwitterApacheThrift.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8C69465E24B7965E002866A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "TwitterApacheThrift::TwitterApacheThriftTests";
+			remoteInfo = TwitterApacheThriftTests;
+		};
+		8C69465F24B7965E002866A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "TwitterApacheThrift::TwitterApacheThrift";
+			remoteInfo = TwitterApacheThrift;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8C69473D24B79F7D002866A6 /* TwitterApacheThrift.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = TwitterApacheThrift.xcconfig; sourceTree = "<group>"; };
+		8C6947EE24B8BA28002866A6 /* TwitterApacheThriftTests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = TwitterApacheThriftTests.xcconfig; sourceTree = "<group>"; };
+		8CAE0D772542458E00B15B1F /* TwitterApacheThriftProject.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = TwitterApacheThriftProject.Release.xcconfig; sourceTree = "<group>"; };
+		8CE3B025254242B500F89931 /* TwitterApacheThriftProject.Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = TwitterApacheThriftProject.Debug.xcconfig; sourceTree = "<group>"; };
+		8CE3B027254242D900F89931 /* TwitterApacheThriftProject.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = TwitterApacheThriftProject.xcconfig; sourceTree = "<group>"; };
+		OBJ_10 /* MemoryBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryBuffer.swift; sourceTree = "<group>"; };
+		OBJ_11 /* MutableBinaryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableBinaryProtocol.swift; sourceTree = "<group>"; };
+		OBJ_12 /* PreencodedContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreencodedContainer.swift; sourceTree = "<group>"; };
+		OBJ_13 /* ThriftCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThriftCodable.swift; sourceTree = "<group>"; };
+		OBJ_14 /* ThriftDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThriftDecoder.swift; sourceTree = "<group>"; };
+		OBJ_15 /* ThriftEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThriftEncoder.swift; sourceTree = "<group>"; };
+		OBJ_16 /* ThriftType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThriftType.swift; sourceTree = "<group>"; };
+		OBJ_19 /* Fixture.thrift */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fixture.thrift; sourceTree = "<group>"; };
+		OBJ_21 /* CollectiontThriftStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectiontThriftStruct.swift; sourceTree = "<group>"; };
+		OBJ_22 /* EnumStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumStruct.swift; sourceTree = "<group>"; };
+		OBJ_23 /* FoundationThriftStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationThriftStruct.swift; sourceTree = "<group>"; };
+		OBJ_24 /* MyUnion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUnion.swift; sourceTree = "<group>"; };
+		OBJ_25 /* OptionalThriftStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalThriftStruct.swift; sourceTree = "<group>"; };
+		OBJ_26 /* SomeEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeEnum.swift; sourceTree = "<group>"; };
+		OBJ_27 /* SubobjectThriftStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubobjectThriftStruct.swift; sourceTree = "<group>"; };
+		OBJ_28 /* UnionClassA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionClassA.swift; sourceTree = "<group>"; };
+		OBJ_29 /* UnionClassB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionClassB.swift; sourceTree = "<group>"; };
+		OBJ_30 /* UnionStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionStruct.swift; sourceTree = "<group>"; };
+		OBJ_31 /* BinaryProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryProtocolTests.swift; sourceTree = "<group>"; };
+		OBJ_32 /* Fixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
+		OBJ_33 /* MutableBinaryProtocolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableBinaryProtocolTests.swift; sourceTree = "<group>"; };
+		OBJ_34 /* PreencodedContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreencodedContainerTests.swift; sourceTree = "<group>"; };
+		OBJ_35 /* ThriftDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThriftDecodingTests.swift; sourceTree = "<group>"; };
+		OBJ_36 /* ThriftEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThriftEncoderTests.swift; sourceTree = "<group>"; };
+		OBJ_37 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
+		OBJ_41 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_9 /* BinaryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryProtocol.swift; sourceTree = "<group>"; };
+		"TwitterApacheThrift::TwitterApacheThrift::Product" /* TwitterApacheThrift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TwitterApacheThrift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"TwitterApacheThrift::TwitterApacheThriftTests::Product" /* TwitterApacheThriftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = TwitterApacheThriftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		OBJ_55 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_89 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_90 /* TwitterApacheThrift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8C69473824B79ED9002866A6 /* BuildConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				8C6947EE24B8BA28002866A6 /* TwitterApacheThriftTests.xcconfig */,
+				8C69473D24B79F7D002866A6 /* TwitterApacheThrift.xcconfig */,
+				8CE3B027254242D900F89931 /* TwitterApacheThriftProject.xcconfig */,
+				8CAE0D772542458E00B15B1F /* TwitterApacheThriftProject.Release.xcconfig */,
+				8CE3B025254242B500F89931 /* TwitterApacheThriftProject.Debug.xcconfig */,
+			);
+			path = BuildConfiguration;
+			sourceTree = "<group>";
+		};
+		OBJ_17 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_18 /* TwitterApacheThriftTests */,
+			);
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_18 /* TwitterApacheThriftTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_19 /* Fixture.thrift */,
+				OBJ_20 /* AutoGenerated */,
+				OBJ_31 /* BinaryProtocolTests.swift */,
+				OBJ_32 /* Fixtures.swift */,
+				OBJ_33 /* MutableBinaryProtocolTests.swift */,
+				OBJ_34 /* PreencodedContainerTests.swift */,
+				OBJ_35 /* ThriftDecodingTests.swift */,
+				OBJ_36 /* ThriftEncoderTests.swift */,
+				OBJ_37 /* XCTestManifests.swift */,
+			);
+			name = TwitterApacheThriftTests;
+			path = Tests/TwitterApacheThriftTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_20 /* AutoGenerated */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_21 /* CollectiontThriftStruct.swift */,
+				OBJ_22 /* EnumStruct.swift */,
+				OBJ_23 /* FoundationThriftStruct.swift */,
+				OBJ_24 /* MyUnion.swift */,
+				OBJ_25 /* OptionalThriftStruct.swift */,
+				OBJ_26 /* SomeEnum.swift */,
+				OBJ_27 /* SubobjectThriftStruct.swift */,
+				OBJ_28 /* UnionClassA.swift */,
+				OBJ_29 /* UnionClassB.swift */,
+				OBJ_30 /* UnionStruct.swift */,
+			);
+			path = AutoGenerated;
+			sourceTree = "<group>";
+		};
+		OBJ_38 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"TwitterApacheThrift::TwitterApacheThrift::Product" /* TwitterApacheThrift.framework */,
+				"TwitterApacheThrift::TwitterApacheThriftTests::Product" /* TwitterApacheThriftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_5 = {
+			isa = PBXGroup;
+			children = (
+				8C69473824B79ED9002866A6 /* BuildConfiguration */,
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_17 /* Tests */,
+				OBJ_38 /* Products */,
+				OBJ_41 /* README.md */,
+			);
+			sourceTree = "<group>";
+		};
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* TwitterApacheThrift */,
+			);
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_8 /* TwitterApacheThrift */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* BinaryProtocol.swift */,
+				OBJ_10 /* MemoryBuffer.swift */,
+				OBJ_11 /* MutableBinaryProtocol.swift */,
+				OBJ_12 /* PreencodedContainer.swift */,
+				OBJ_13 /* ThriftCodable.swift */,
+				OBJ_14 /* ThriftDecoder.swift */,
+				OBJ_15 /* ThriftEncoder.swift */,
+				OBJ_16 /* ThriftType.swift */,
+			);
+			name = TwitterApacheThrift;
+			path = Sources/TwitterApacheThrift;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		"TwitterApacheThrift::SwiftPMPackageDescription" /* TwitterApacheThriftPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_57 /* Build configuration list for PBXNativeTarget "TwitterApacheThriftPackageDescription" */;
+			buildPhases = (
+				OBJ_60 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TwitterApacheThriftPackageDescription;
+			productName = TwitterApacheThriftPackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+		"TwitterApacheThrift::TwitterApacheThrift" /* TwitterApacheThrift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_43 /* Build configuration list for PBXNativeTarget "TwitterApacheThrift" */;
+			buildPhases = (
+				OBJ_46 /* Sources */,
+				OBJ_55 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TwitterApacheThrift;
+			productName = TwitterApacheThrift;
+			productReference = "TwitterApacheThrift::TwitterApacheThrift::Product" /* TwitterApacheThrift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"TwitterApacheThrift::TwitterApacheThriftTests" /* TwitterApacheThriftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_68 /* Build configuration list for PBXNativeTarget "TwitterApacheThriftTests" */;
+			buildPhases = (
+				OBJ_71 /* Sources */,
+				OBJ_89 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_91 /* PBXTargetDependency */,
+			);
+			name = TwitterApacheThriftTests;
+			productName = TwitterApacheThriftTests;
+			productReference = "TwitterApacheThrift::TwitterApacheThriftTests::Product" /* TwitterApacheThriftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		OBJ_1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastSwiftMigration = 9999;
+				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					"TwitterApacheThrift::TwitterApacheThrift" = {
+						ProvisioningStyle = Manual;
+					};
+					"TwitterApacheThrift::TwitterApacheThriftTests" = {
+						ProvisioningStyle = Manual;
+					};
+				};
+			};
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "TwitterApacheThrift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = OBJ_5;
+			productRefGroup = OBJ_38 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"TwitterApacheThrift::TwitterApacheThrift" /* TwitterApacheThrift */,
+				"TwitterApacheThrift::SwiftPMPackageDescription" /* TwitterApacheThriftPackageDescription */,
+				"TwitterApacheThrift::TwitterApacheThriftPackageTests::ProductTarget" /* TwitterApacheThriftPackageTests */,
+				"TwitterApacheThrift::TwitterApacheThriftTests" /* TwitterApacheThriftTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		OBJ_46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_47 /* BinaryProtocol.swift in Sources */,
+				OBJ_48 /* MemoryBuffer.swift in Sources */,
+				OBJ_49 /* MutableBinaryProtocol.swift in Sources */,
+				OBJ_50 /* PreencodedContainer.swift in Sources */,
+				OBJ_51 /* ThriftCodable.swift in Sources */,
+				OBJ_52 /* ThriftDecoder.swift in Sources */,
+				OBJ_53 /* ThriftEncoder.swift in Sources */,
+				OBJ_54 /* ThriftType.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_60 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_61 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_72 /* CollectiontThriftStruct.swift in Sources */,
+				OBJ_73 /* EnumStruct.swift in Sources */,
+				OBJ_74 /* FoundationThriftStruct.swift in Sources */,
+				OBJ_75 /* MyUnion.swift in Sources */,
+				OBJ_76 /* OptionalThriftStruct.swift in Sources */,
+				OBJ_77 /* SomeEnum.swift in Sources */,
+				OBJ_78 /* SubobjectThriftStruct.swift in Sources */,
+				OBJ_79 /* UnionClassA.swift in Sources */,
+				OBJ_80 /* UnionClassB.swift in Sources */,
+				OBJ_81 /* UnionStruct.swift in Sources */,
+				OBJ_82 /* BinaryProtocolTests.swift in Sources */,
+				OBJ_83 /* Fixtures.swift in Sources */,
+				OBJ_84 /* MutableBinaryProtocolTests.swift in Sources */,
+				OBJ_85 /* PreencodedContainerTests.swift in Sources */,
+				OBJ_86 /* ThriftDecodingTests.swift in Sources */,
+				OBJ_87 /* ThriftEncoderTests.swift in Sources */,
+				OBJ_88 /* XCTestManifests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		OBJ_66 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "TwitterApacheThrift::TwitterApacheThriftTests" /* TwitterApacheThriftTests */;
+			targetProxy = 8C69465E24B7965E002866A6 /* PBXContainerItemProxy */;
+		};
+		OBJ_91 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "TwitterApacheThrift::TwitterApacheThrift" /* TwitterApacheThrift */;
+			targetProxy = 8C69465F24B7965E002866A6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8CE3B025254242B500F89931 /* TwitterApacheThriftProject.Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8CAE0D772542458E00B15B1F /* TwitterApacheThriftProject.Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		OBJ_44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C69473D24B79F7D002866A6 /* TwitterApacheThrift.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		OBJ_45 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C69473D24B79F7D002866A6 /* TwitterApacheThrift.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		OBJ_58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode 11.5.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		OBJ_59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode 11.5.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1.0";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		OBJ_64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		OBJ_65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		OBJ_69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C6947EE24B8BA28002866A6 /* TwitterApacheThriftTests.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		OBJ_70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C6947EE24B8BA28002866A6 /* TwitterApacheThriftTests.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		OBJ_2 /* Build configuration list for PBXProject "TwitterApacheThrift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_43 /* Build configuration list for PBXNativeTarget "TwitterApacheThrift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_44 /* Debug */,
+				OBJ_45 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_57 /* Build configuration list for PBXNativeTarget "TwitterApacheThriftPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_58 /* Debug */,
+				OBJ_59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_63 /* Build configuration list for PBXAggregateTarget "TwitterApacheThriftPackageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_64 /* Debug */,
+				OBJ_65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_68 /* Build configuration list for PBXNativeTarget "TwitterApacheThriftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_69 /* Debug */,
+				OBJ_70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = OBJ_1 /* Project object */;
+}

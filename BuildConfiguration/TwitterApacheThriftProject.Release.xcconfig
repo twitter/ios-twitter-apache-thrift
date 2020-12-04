@@ -1,0 +1,17 @@
+//
+//  TwitterApacheThriftProject.Release.xcconfig
+//  Frameworks
+//
+//  Created on 10/22/2020.
+//  Copyright (c) 2020 Twitter. All rights reserved.
+//
+
+#include "TwitterApacheThriftProject.xcconfig"
+
+// FB7419630 - unless dwarf-with-dsym explicitly set, no dSYM will be generated for mac catalyst build
+DEBUG_INFORMATION_FORMAT[sdk=macosx*] = dwarf-with-dsym
+
+GCC_OPTIMIZATION_LEVEL = fast
+
+SWIFT_COMPILATION_MODE = wholemodule
+SWIFT_OPTIMIZATION_LEVEL = -Osize

@@ -1,0 +1,31 @@
+//
+//  TwitterApacheThriftProject.Debug.xcconfig
+//  TwitterApacheThrift
+//
+//  Created on 10/22/2020.
+//  Copyright (c) 2020 Twitter. All rights reserved.
+//
+
+#include "TwitterApacheThriftProject.xcconfig"
+
+// Architectures
+ONLY_ACTIVE_ARCH = YES
+
+// Build Options
+VALIDATE_PRODUCT = NO
+ENABLE_TESTABILITY = YES
+
+// Deployment
+COPY_PHASE_STRIP = NO
+
+// Apple LLVM 6.0 - Code Generation
+GCC_OPTIMIZATION_LEVEL = 0
+
+// Apple LLVM 6.0 - Preprocessing
+ENABLE_NS_ASSERTIONS = YES
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) DEBUG=1
+
+// Swift Compiler - Code Generation
+SWIFT_OPTIMIZATION_LEVEL = -Onone
+
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) DEBUG
