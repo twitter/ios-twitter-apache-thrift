@@ -1,3 +1,6 @@
+// Copyright 2020 Twitter, Inc.
+// Licensed under the Apache License, Version 2.0
+// http://www.apache.org/licenses/LICENSE-2.0
 //
 //  ThriftDecodingTests.swift
 //  TwitterApacheThriftTests
@@ -51,3 +54,15 @@ class PreencodedContainerTests: XCTestCase {
         XCTAssertEqual(valueStructValue.value, 57)
     }
 }
+
+#if !canImport(ObjectiveC)
+extension PreencodedContainerTests {
+    static var allTests : [(String, ((PreencodedContainerTests) -> () throws -> Void))] {
+        return [
+            ("testEncodingData", testEncodingData),
+            ("testEncodingValue", testEncodingValue),
+            ("testDecoding", testDecoding)
+        ]
+    }
+}
+#endif

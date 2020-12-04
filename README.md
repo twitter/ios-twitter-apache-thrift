@@ -1,10 +1,29 @@
-# TwitterApacheThrift
+# ios-twitter-apache-thrift
 
 Swift’s modern model constructs allow a 1:1 mapping to Thrift. Swift with Thrift 
 allows the client and backend to use a common model for representing data.
 
+## Getting Started
 
-## Encoding and Decoding
+### Installing
+
+#### Swift Package Manager
+Add the following to your Package.swift file
+
+```
+.package(name: "TwitterApacheThrift", url: "https://github.com/twitter/ios-twitter-apache-thrift", .upToNextMajor(from: "1.0.0"))
+```
+
+#### Carthage
+Add the following to your Cartfile
+
+```
+github "twitter/ios-twitter-apache-thrift"
+```
+
+### Usage
+
+#### Encoding and Decoding
 The thrift encoder and decoder use the Encoder and Decoder protocols. Conforming
 to these protocols allows the compiler to autogenerate the codeable methods. This 
 reduces the potential for errors; they also receive JSON support for free. The 
@@ -76,7 +95,7 @@ let data = try thriftEncoder.encode(thrift)
 let decoder = ThriftDecoder()
 let thriftObject = try decoder.decode(SomeThriftEncodeable.self, from: thriftData)
 ```
-### Type Mapping
+#### Type Mapping
 Mappings between foundation Swift types to thrift types handled by the library. 
 The following table outlines how the swift types map the thrift type.
 
@@ -141,26 +160,36 @@ public enum MyUnion: ThriftCodable {
   }
 }
 ```
+* Mailing List: opensource@twitter.com
 
-# Installing
+## Support
 
-### Swift Package Manager
-Add the following to your Package.swift file
+Create a [new issue](https://github.com/twitter/ios-twitter-apache-thrift/issues/new) on GitHub.
 
-```
-.package(url: "https://github.com/twitter/ios-twitter-apache-thrift", .upToNextMajor(from: "1.0.0"))
-```
+## Contributing
 
-### Carthage
-Add the following to your Cartfile
+We feel that a welcoming community is important and we ask that you follow Twitter's
+[Open Source Code of Conduct](https://github.com/twitter/code-of-conduct/blob/master/code-of-conduct.md)
+in all interactions with the community.
 
-```
-github "twitter/ios-twitter-apache-thrift"
-```
+## Authors
 
-# Security Issues?
+* @TwitterOSS <opensource@twitter.com>
+
+A full list of [contributors](https://github.com/twitter/ios-twitter-apache-thrift/graphs/contributors?type=a) can be found on GitHub.
+
+Follow [@TwitterOSS](https://twitter.com/twitteross) on Twitter for updates.
+
+## License
+
+Copyright 2020 Twitter, Inc.
+
+Licensed under the Apache License, Version 2.0: https://www.apache.org/licenses/LICENSE-2.0
+
+
+## Security Issues?
 Please report sensitive security issues via Twitter's bug-bounty program (https://hackerone.com/twitter) rather than GitHub.
 
-# Resources
+## Resources
 
 [Thrift Specification](https://thrift.apache.org/static/files/thrift-20070401.pdf)

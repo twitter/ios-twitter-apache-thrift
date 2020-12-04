@@ -10,6 +10,7 @@
 .buildstats/
 /.bundle/
 /.gems/
+/.swiftpm
 /BuildConfiguration/Variables
 /DerivedData/
 /InstrumentedBuild/

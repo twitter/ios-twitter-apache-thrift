@@ -1,3 +1,6 @@
+// Copyright 2020 Twitter, Inc.
+// Licensed under the Apache License, Version 2.0
+// http://www.apache.org/licenses/LICENSE-2.0
 //
 //  BinaryProtocolTests.swift
 //  TwitterApacheThriftTests
@@ -321,3 +324,25 @@ class BinaryProtocolTests: XCTestCase {
         XCTAssertTrue(didThrow)
     }
 }
+
+#if !canImport(ObjectiveC)
+extension BinaryProtocolTests {
+    static var allTests : [(String, ((BinaryProtocolTests) -> () throws -> Void))] {
+        return [
+            ("testReadInt32", testReadInt32),
+            ("testReadInt64", testReadInt64),
+            ("testReadInt16", testReadInt16),
+            ("testReadByte", testReadByte),
+            ("testReadDouble", testReadDouble),
+            ("testReadString", testReadString),
+            ("testReadBinary", testReadBinary),
+            ("testReadBool", testReadBool),
+            ("testReadMapMetadata", testReadMapMetadata),
+            ("testReadSetMetadata", testReadSetMetadata),
+            ("testReadListMetadata", testReadListMetadata),
+            ("testReadFieldMetadata", testReadFieldMetadata),
+            ("testOverflowRead", testOverflowRead)
+        ]
+    }
+}
+#endif

@@ -1,3 +1,6 @@
+// Copyright 2020 Twitter, Inc.
+// Licensed under the Apache License, Version 2.0
+// http://www.apache.org/licenses/LICENSE-2.0
 //
 //  MutableBinaryProtocolTests.swift
 //  TwitterApacheThriftTests
@@ -294,3 +297,26 @@ class MutableBinaryProtocolTests: XCTestCase {
         XCTAssertEqual(binary.getBuffer(), data1)
     }
 }
+
+
+#if !canImport(ObjectiveC)
+extension MutableBinaryProtocolTests {
+    static var allTests : [(String, ((MutableBinaryProtocolTests) -> () throws -> Void))] {
+        return [
+            ("testWriteInt32", testWriteInt32),
+            ("testWriteInt64", testWriteInt64),
+            ("testWriteInt16", testWriteInt16),
+            ("testWriteByte", testWriteByte),
+            ("testWriteDouble", testWriteDouble),
+            ("testWriteString", testWriteString),
+            ("testWriteBinary", testWriteBinary),
+            ("testWriteBool", testWriteBool),
+            ("testWriteMapMetadata", testWriteMapMetadata),
+            ("testWriteSetMetadata", testWriteSetMetadata),
+            ("testWriteListMetadata", testWriteListMetadata),
+            ("testWriteFieldMetadata", testWriteFieldMetadata),
+            ("testWriteStop", testWriteStop)
+        ]
+    }
+}
+#endif
