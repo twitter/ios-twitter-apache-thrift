@@ -17,7 +17,6 @@ jobs:
       - name: xcodebuild
         run: |-
           xcodebuild \
-            -project TwitterApacheThrift.xcodeproj \
             -scheme "TwitterApacheThrift" \
             -destination "platform=iOS Simulator,OS=latest,name=iPhone 11 Pro Max" \
             -quiet \
@@ -25,7 +24,7 @@ jobs:
   test-linux:
     runs-on: ubuntu-latest
     container:
-      image: swift:5.2.3
+      image: swift:5.5.0
     steps:
       - uses: actions/checkout@main
       - name: SwiftPM Build

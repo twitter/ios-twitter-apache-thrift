@@ -10,6 +10,10 @@
 
 ## History
 
+### 1.1.0
+
+- Added Compact Thrift Encoding and Decoding
+
 ### 1.0.1
 
 - Added Documentation
