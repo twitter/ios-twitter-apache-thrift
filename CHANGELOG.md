@@ -4,11 +4,15 @@
 
 **Document version:** 1.0.0
 
-**Last updated:** 12/04/2020
+**Last updated:** 11/09/2021
 
 **Author:** Justin Anderson
 
 ## History
+
+### 1.0.1
+
+- Added Documentation
 
 ### 1.0.0
 

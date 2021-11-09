@@ -24,6 +24,7 @@ public extension ThriftEncodable {
     func validate() throws {}
 }
 
+/// Errors thrown when the thrift is encoded.
 public enum ThriftEncoderError: Error {
     /// Internal buffer is uninitialized
     case uninitializedEncodingData
@@ -38,7 +39,7 @@ public enum ThriftEncoderError: Error {
 ///An object that encodes instances of a data type to Thrift objects.
 public class ThriftEncoder: Encoder {
 
-    fileprivate var binary: MutableBinaryProtocol?
+    fileprivate var binary: MutableThriftBinary?
 
     public var codingPath: [CodingKey] = []
 
@@ -53,7 +54,7 @@ public class ThriftEncoder: Encoder {
     /// - returns: A new `Data` value containing the encoded Thrift data.
     /// - throws: `ThriftEncoderError` An error if any value throws an error during encoding.
     public func encode<T>(_ value: T) throws -> Data where T: ThriftEncodable {
-        let binary = MutableBinaryProtocol()
+        let binary = MutableThriftBinary()
         self.binary = binary
         try value.thriftEncode(to: self)
         return binary.getBuffer()

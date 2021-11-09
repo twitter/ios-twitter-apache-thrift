@@ -26,7 +26,9 @@ import Foundation
 ///     }
 ///
 public enum PreencodedContainer<T: Codable> {
+    /// Preencoded data
     case encodedData(Data)
+    /// A value that needs to be encoded/decoded
     case value(T)
 }
 

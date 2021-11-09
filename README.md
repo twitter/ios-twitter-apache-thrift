@@ -1,4 +1,4 @@
-# ios-twitter-apache-thrift
+# Twitter Apache Thrift
 
 Swift’s modern model constructs allow a 1:1 mapping to Thrift. Swift with Thrift 
 allows the client and backend to use a common model for representing data.

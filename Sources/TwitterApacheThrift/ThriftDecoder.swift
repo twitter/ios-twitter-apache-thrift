@@ -25,6 +25,7 @@ public extension ThriftDecodable {
     }
 }
 
+/// Errors thrown when the thrift is decoded.
 public enum ThriftDecoderError: Error {
     /// The key of the field is not the next key in the thrift, possibly because
     /// of malformed thrift data or model discrepancy
@@ -52,7 +53,7 @@ public class ThriftDecoder: Decoder {
 
     public var userInfo: [CodingUserInfoKey : Any] = [:]
 
-    fileprivate var binary: BinaryProtocol?
+    fileprivate var binary: ThriftBinary?
 
     /// Initializes `self` with defaults.
     public init() {}
@@ -64,7 +65,7 @@ public class ThriftDecoder: Decoder {
     /// - returns: A value of the requested type.
     /// - throws: An `ThriftDecoderError` if any value throws an error during decoding.
     public func decode<T>(_ type: T.Type, from data: Data) throws -> T where T : ThriftDecodable {
-        self.binary = BinaryProtocol(data: data)
+        self.binary = ThriftBinary(data: data)
         return try type.init(fromThrift: self)
     }
 

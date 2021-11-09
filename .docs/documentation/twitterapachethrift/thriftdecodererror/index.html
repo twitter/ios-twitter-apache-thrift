@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    
+    <title>ThriftDecoderError| Documentation</title>
+    
+    <link rel="icon"       href="../../../favicon.ico" />
+    <link rel="mask-icon"  href="../../../favicon.svg" color="#333333" />
+    <link rel='stylesheet' href='../../../css/site.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/default.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="doc-topic">
+        <nav role="navigation" class="nav documentation-nav">
+  <div class="nav__wrapper">
+    <div class="nav__background"></div>
+    <div class="nav-content">
+      <div class="nav-title">
+        <span class="nav-title-link inactive">Documentation</span>
+      </div>
+      <div class="nav-menu">
+        <div class="nav-menu-tray">
+          <ul class="nav-menu-items hierarchy">
+            
+              <li class="nav-menu-item hierarchy-item">
+                
+                
+                  <a href="../index.html" class="item">TwitterApacheThrift</a>
+                
+              </li>
+            
+              <li class="nav-menu-item hierarchy-item">
+                
+                  <span class="current item">ThriftDecoderError</span>
+                
+                
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main id="main" role="main" class="main">
+  <div class="topictitle">
+  <span class="eyebrow">Enumeration</span>
+  <h1 class="title">ThriftDecoderError</h1>
+</div>
+
+  <div class="container content-grid">
+  <div class="description">
+    <div class="abstract content">
+      Errors thrown when the thrift is decoded.
+    </div>
+  </div>
+  
+  <!-- The sidebar once we have one: <div class="summary"></div> -->
+  
+  <div class="primary-content">
+    <section id='declaration' class='declaration'>
+  <h2>Declaration</h2>
+  <div class='declaration-group'>
+    <pre class='source indented'><code><span class='token-keyword'>enum</span> <span class='token-identifier'>ThriftDecoderError</span></code></pre>
+  </div>
+</section>
+
+  </div>
+</div>
+
+  
+  <section id='topics' class='contenttable alt-light'>
+  <div class='container'>
+    <h2 class='title'>Topics</h2>
+
+    
+      <div class="row contenttable-section">
+        <div class="col section-title large-3 medium-3 small-12">
+          <h3 class="title">Enumeration Cases</h3>
+        </div>
+  
+        <div class="col section-content large-9 medium-9 small-12">
+          
+            <div class="link-block topic">
+              
+                <a href="../../../documentation/TwitterApacheThrift/ThriftDecoderError/codingKeyMissingIntValue(key:).html" class="link has-adjacent-elements">
+                  <code class="decorated-title"><span class='decorator'>case</span><span class='decorator empty-token'> </span><span class='identifier'>codingKeyMissingIntValue</span><span class='decorator'>(</span><span class='decorator'>key</span><span class='decorator'>: </span><span class='decorator'>CodingKey</span><span class='decorator'>)</span></code>
+                </a>
+              
+              
+              <div class="abstract">
+                <div class="content">CodingKey is missing the value</div>
+              </div>
+            </div>
+          
+            <div class="link-block topic">
+              
+                <a href="../../../documentation/TwitterApacheThrift/ThriftDecoderError/keyOrderMismatch.html" class="link has-adjacent-elements">
+                  <code class="decorated-title"><span class='decorator'>case</span><span class='decorator empty-token'> </span><span class='identifier'>keyOrderMismatch</span></code>
+                </a>
+              
+              
+              <div class="abstract">
+                <div class="content">The key of the field is not the next key in the thrift, possibly because of malformed thrift data or model discrepancy</div>
+              </div>
+            </div>
+          
+            <div class="link-block topic">
+              
+                <a href="../../../documentation/TwitterApacheThrift/ThriftDecoderError/nonUTF8StringData(_:).html" class="link has-adjacent-elements">
+                  <code class="decorated-title"><span class='decorator'>case</span><span class='decorator empty-token'> </span><span class='identifier'>nonUTF8StringData</span><span class='decorator'>(</span><span class='decorator'>Data</span><span class='decorator'>)</span></code>
+                </a>
+              
+              
+              <div class="abstract">
+                <div class="content">The string found while decoding is not UTF8 formmated, possibly because of malformed thrift or an encoding error.</div>
+              </div>
+            </div>
+          
+            <div class="link-block topic">
+              
+                <a href="../../../documentation/TwitterApacheThrift/ThriftDecoderError/readBufferOverflow.html" class="link has-adjacent-elements">
+                  <code class="decorated-title"><span class='decorator'>case</span><span class='decorator empty-token'> </span><span class='identifier'>readBufferOverflow</span></code>
+                </a>
+              
+              
+              <div class="abstract">
+                <div class="content">The buffer overflowed while trying to read a field, possibly because of using the wrong model type</div>
+              </div>
+            </div>
+          
+            <div class="link-block topic">
+              
+                <a href="../../../documentation/TwitterApacheThrift/ThriftDecoderError/undecodableType(type:).html" class="link has-adjacent-elements">
+                  <code class="decorated-title"><span class='decorator'>case</span><span class='decorator empty-token'> </span><span class='identifier'>undecodableType</span><span class='decorator'>(</span><span class='decorator'>type</span><span class='decorator'>: </span><span class='decorator'>Any</span><span class='decorator'>)</span></code>
+                </a>
+              
+              
+              <div class="abstract">
+                <div class="content">The type is not encodable, example not conforming to ThriftDecodable</div>
+              </div>
+            </div>
+          
+            <div class="link-block topic">
+              
+                <a href="../../../documentation/TwitterApacheThrift/ThriftDecoderError/uninitializedDecodingData.html" class="link has-adjacent-elements">
+                  <code class="decorated-title"><span class='decorator'>case</span><span class='decorator empty-token'> </span><span class='identifier'>uninitializedDecodingData</span></code>
+                </a>
+              
+              
+              <div class="abstract">
+                <div class="content">Internal buffer is uninitialized should only happen if using methods other then <code>decode&lt;T&gt;(_ type: T.Type, from data: Data)</code> for decoding</div>
+              </div>
+            </div>
+          
+            <div class="link-block topic">
+              
+                <a href="../../../documentation/TwitterApacheThrift/ThriftDecoderError/unsupportedThriftType.html" class="link has-adjacent-elements">
+                  <code class="decorated-title"><span class='decorator'>case</span><span class='decorator empty-token'> </span><span class='identifier'>unsupportedThriftType</span></code>
+                </a>
+              
+              
+              <div class="abstract">
+                <div class="content">The thrift data has a unsupported type value</div>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+      <div class="row contenttable-section">
+        <div class="col section-title large-3 medium-3 small-12">
+          <h3 class="title">Default Implementations</h3>
+        </div>
+  
+        <div class="col section-content large-9 medium-9 small-12">
+          
+            <div class="link-block topic">
+              
+              
+                <a href="../../../documentation/TwitterApacheThrift/ThriftDecoderError/Error-Implementations.html" class="link has-adjacent-elements">
+                  <span class="topic-icon-wrapper">&nbsp;</span>
+                  Error Implementations
+                </a>
+              
+              <div class="abstract">
+                <div class="content"></div>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+    
+  </div>
+</section>
+
+  
+</main>
+
+      </div>
+    </div>
+    <footer class="footer"></footer>
+    <script>hljs.highlightAll();</script>
+  </body>
+</html>

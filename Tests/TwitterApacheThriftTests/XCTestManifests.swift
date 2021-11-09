@@ -7,8 +7,8 @@ import XCTest
 #if !canImport(ObjectiveC)
 public func allTests() -> [XCTestCaseEntry] {
     return [
-        testCase(BinaryProtocolTests.allTests),
-        testCase(MutableBinaryProtocolTests.allTests),
+        testCase(ThriftBinaryTests.allTests),
+        testCase(MutableThriftBinaryTests.allTests),
         testCase(ThriftDecoderTests.allTests),
         testCase(ThriftEncoderTests.allTests),
         testCase(PreencodedContainerTests.allTests)

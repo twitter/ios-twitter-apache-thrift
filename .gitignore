@@ -26,4 +26,4 @@ reports/
 testbuild.zip
 xcuserdata/
 xcbaselines/
-
+.docc-build/

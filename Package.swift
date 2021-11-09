@@ -1,4 +1,4 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 //
 // Copyright 2020 Twitter, Inc.
@@ -9,9 +9,14 @@ import PackageDescription
 
 let package = Package(
     name: "TwitterApacheThrift",
+    platforms: [
+        .iOS("13.4"),
+        .macOS("10.15.4")
+    ],
     products: [
         .library(
             name: "TwitterApacheThrift",
+            type: .dynamic,
             targets: [
                 "TwitterApacheThrift"
             ]
@@ -21,9 +26,16 @@ let package = Package(
     targets: [
         .target(
             name: "TwitterApacheThrift",
-            dependencies: []),
+            dependencies: []
+        ),
         .testTarget(
             name: "TwitterApacheThriftTests",
-            dependencies: ["TwitterApacheThrift"])
+            dependencies: [
+                "TwitterApacheThrift"
+            ],
+            exclude:[
+                "Fixture.thrift"
+            ]
+        )
     ]
 )
