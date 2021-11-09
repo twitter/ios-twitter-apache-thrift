@@ -13,6 +13,7 @@ struct FoundationThriftStruct {
 
 struct OptionalThriftStruct {
   1: optional i16 int16Value
+  2: required bool someBool
 }
 
 struct SubobjectThriftStruct {

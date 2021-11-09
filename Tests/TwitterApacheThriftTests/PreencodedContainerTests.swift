@@ -54,15 +54,3 @@ class PreencodedContainerTests: XCTestCase {
         XCTAssertEqual(valueStructValue.value, 57)
     }
 }
-
-#if !canImport(ObjectiveC)
-extension PreencodedContainerTests {
-    static var allTests : [(String, ((PreencodedContainerTests) -> () throws -> Void))] {
-        return [
-            ("testEncodingData", testEncodingData),
-            ("testEncodingValue", testEncodingValue),
-            ("testDecoding", testDecoding)
-        ]
-    }
-}
-#endif

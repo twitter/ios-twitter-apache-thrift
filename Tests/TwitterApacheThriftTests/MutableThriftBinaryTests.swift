@@ -276,17 +276,17 @@ class MutableThriftBinaryTests: XCTestCase {
     func testWriteFieldMetadata() {
         let data1 = Data([10, 0, 6])
         binary = MutableThriftBinary()
-        binary.writeFieldBegin(fieldType: .int64, fieldID: 6)
+        binary.writeFieldBegin(fieldType: .int64, fieldID: 6, previousId: 0)
         XCTAssertEqual(binary.getBuffer(), data1)
 
         let data2 = Data([11, 0, 2])
         binary = MutableThriftBinary()
-        binary.writeFieldBegin(fieldType: .string, fieldID: 2)
+        binary.writeFieldBegin(fieldType: .string, fieldID: 2, previousId: 0)
         XCTAssertEqual(binary.getBuffer(), data2)
 
         let data3 = Data([6, 0, 1])
         binary = MutableThriftBinary()
-        binary.writeFieldBegin(fieldType: .int16, fieldID: 1)
+        binary.writeFieldBegin(fieldType: .int16, fieldID: 1, previousId: 0)
         XCTAssertEqual(binary.getBuffer(), data3)
     }
 
@@ -297,26 +297,3 @@ class MutableThriftBinaryTests: XCTestCase {
         XCTAssertEqual(binary.getBuffer(), data1)
     }
 }
-
-
-#if !canImport(ObjectiveC)
-extension MutableThriftBinaryTests {
-    static var allTests : [(String, ((MutableThriftBinaryTests) -> () throws -> Void))] {
-        return [
-            ("testWriteInt32", testWriteInt32),
-            ("testWriteInt64", testWriteInt64),
-            ("testWriteInt16", testWriteInt16),
-            ("testWriteByte", testWriteByte),
-            ("testWriteDouble", testWriteDouble),
-            ("testWriteString", testWriteString),
-            ("testWriteBinary", testWriteBinary),
-            ("testWriteBool", testWriteBool),
-            ("testWriteMapMetadata", testWriteMapMetadata),
-            ("testWriteSetMetadata", testWriteSetMetadata),
-            ("testWriteListMetadata", testWriteListMetadata),
-            ("testWriteFieldMetadata", testWriteFieldMetadata),
-            ("testWriteStop", testWriteStop)
-        ]
-    }
-}
-#endif

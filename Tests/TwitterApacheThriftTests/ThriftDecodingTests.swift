@@ -29,21 +29,21 @@ class ThriftDecoderTests: XCTestCase {
     }
 
     func testOptionalTypes() throws {
-        let data = try thriftDecoder.decode(OptionalThriftStruct.self, from: Data(base64Encoded: "BgABAAwA")!)
+        let data = try thriftDecoder.decode(OptionalThriftStruct.self, from: Data(base64Encoded: "BgABAAwCAAIBAA==")!)
         XCTAssertEqual(data, Fixtures.optionalThriftStruct)
 
-        let dataWithNil = try thriftDecoder.decode(OptionalThriftStruct.self, from: Data(base64Encoded: "AA==")!)
+        let dataWithNil = try thriftDecoder.decode(OptionalThriftStruct.self, from: Data(base64Encoded: "AgACAQA=")!)
         XCTAssertEqual(dataWithNil, Fixtures.optionalThriftStruct.with(int16Value: nil))
     }
 
     func testStructsTypes() throws {
-        let data = try thriftDecoder.decode(SubobjectThriftStruct.self, from: Data(base64Encoded: "DAABBgABAAwABgACADIA")!)
+        let data = try thriftDecoder.decode(SubobjectThriftStruct.self, from: Data(base64Encoded: "DAABBgABAAwCAAIBAAYAAgAyAA==")!)
         XCTAssertEqual(data, Fixtures.subobjectThriftStruct)
 
         let dataWithNil = try thriftDecoder.decode(SubobjectThriftStruct.self, from: Data(base64Encoded: "BgACADIA")!)
         XCTAssertEqual(dataWithNil, Fixtures.subobjectThriftStruct.with(value: nil))
 
-        let dataWithNilInSubObject = try thriftDecoder.decode(SubobjectThriftStruct.self, from: Data(base64Encoded: "DAABAAYAAgAyAA==")!)
+        let dataWithNilInSubObject = try thriftDecoder.decode(SubobjectThriftStruct.self, from: Data(base64Encoded: "DAABAgACAQAGAAIAMgA=")!)
         XCTAssertEqual(dataWithNilInSubObject, Fixtures.subobjectThriftStruct.with(value: Fixtures.optionalThriftStruct.with(int16Value: nil)))
     }
 
@@ -106,7 +106,7 @@ class ThriftDecoderTests: XCTestCase {
         XCTAssertEqual(value, Fixtures.dataStruct)
     }
 
-    func testEmbededCollections() throws {
+    func testEmbeddedCollections() throws {
         struct ArrayStruct: ThriftCodable, Equatable {
             let array: [CollectiontThriftStruct]
             enum CodingKeys: Int, CodingKey {
@@ -119,22 +119,3 @@ class ThriftDecoderTests: XCTestCase {
         XCTAssertEqual(value, expectedValue)
     }
 }
-
-#if !canImport(ObjectiveC)
-extension ThriftDecoderTests {
-    static var allTests : [(String, ((ThriftDecoderTests) -> () throws -> Void))] {
-        return [
-            ("testEncodeFoundationTypes", testEncodeFoundationTypes),
-            ("testOptionalTypes", testOptionalTypes),
-            ("testStructsTypes", testStructsTypes),
-            ("testCollections", testCollections),
-            ("testUnions", testUnions),
-            ("testEnums", testEnums),
-            ("testDictionariesWithStructs", testDictionariesWithStructs),
-            ("testDecodingUndecodableType", testDecodingUndecodableType),
-            ("testDataDecoding", testDataDecoding),
-            ("testEmbededCollections", testEmbededCollections)
-        ]
-    }
-}
-#endif

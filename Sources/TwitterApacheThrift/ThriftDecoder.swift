@@ -17,11 +17,6 @@ import Foundation
 public extension ThriftDecodable {
     init(fromThrift decoder: ThriftDecoder) throws {
         try self.init(from: decoder)
-        let (nextField, _) = try decoder.readFieldAndId()
-        if nextField == .stop {
-            //Read the struct stop
-            _ = try decoder.binary?.readByte()
-        }
     }
 }
 
@@ -37,7 +32,7 @@ public enum ThriftDecoderError: Error {
     case codingKeyMissingIntValue(key: CodingKey)
     /// The type is not encodable, example not conforming to ThriftDecodable
     case undecodableType(type: Any)
-    /// The string found while decoding is not UTF8 formmated, possibly because
+    /// The string found while decoding is not UTF8 formatted, possibly because
     /// of malformed thrift or an encoding error.
     case nonUTF8StringData(Data)
     /// The buffer overflowed while trying to read a field, possibly because
@@ -45,6 +40,8 @@ public enum ThriftDecoderError: Error {
     case readBufferOverflow
     /// The thrift data has a unsupported type value
     case unsupportedThriftType
+    /// The decoder unexpectedly found nil while decoding
+    case unexpectedlyFoundNil
 }
 
 ///An object that decodes instances of a data type from Thrift objects.
@@ -54,9 +51,20 @@ public class ThriftDecoder: Decoder {
     public var userInfo: [CodingUserInfoKey : Any] = [:]
 
     fileprivate var binary: ThriftBinary?
+    fileprivate var value: ThriftObject?
+
+    /// The specification to be used for decoding
+    public var specification: ThriftSpecification = .standard
 
     /// Initializes `self` with defaults.
     public init() {}
+
+    /// Initializes `self` with defaults.
+    fileprivate init(value: ThriftObject, specification: ThriftSpecification) {
+        self.value = value
+        self.specification = specification
+    }
+
 
     /// Decodes a top-level value of the given type from the given Thrift representation.
     ///
@@ -65,7 +73,9 @@ public class ThriftDecoder: Decoder {
     /// - returns: A value of the requested type.
     /// - throws: An `ThriftDecoderError` if any value throws an error during decoding.
     public func decode<T>(_ type: T.Type, from data: Data) throws -> T where T : ThriftDecodable {
-        self.binary = ThriftBinary(data: data)
+        self.binary = specification == .compact ? ThriftCompactBinary(data: data) : ThriftBinary(data: data)
+        let thriftType = try ThriftType.decodableType(from: type.self)
+        self.value = try binary?.readThrift(type: thriftType)
         return try type.init(fromThrift: self)
     }
 
@@ -81,12 +91,23 @@ public class ThriftDecoder: Decoder {
         return UnkeyedContainer(decoder: self)
     }
 
-    private struct KeyedContainer<Key: CodingKey>: KeyedDecodingContainerProtocol {
+    fileprivate func thriftCollectionContainer() throws -> UnkeyedContainer {
+        return UnkeyedContainer(decoder: self)
+    }
+
+    private class KeyedContainer<Key: CodingKey>: KeyedDecodingContainerProtocol {
         var allKeys: [Key] = []
 
         var decoder: ThriftDecoder
 
         var codingPath: [CodingKey] { return [] }
+
+        var previousFieldId: Int = 0
+
+
+        init(decoder: ThriftDecoder) {
+            self.decoder = decoder
+        }
 
         func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type, forKey key: Key) throws -> KeyedDecodingContainer<NestedKey> where NestedKey : CodingKey {
             return try decoder.container(keyedBy: type)
@@ -105,7 +126,7 @@ public class ThriftDecoder: Decoder {
         }
 
         func decode<T>(_ type: T.Type, forKey key: Key) throws -> T where T : Decodable {
-            return try decoder.decode(type, forKey: key)
+            return try decoder.decode(type, forKey: key, previousFieldId: previousFieldId)
         }
 
         func contains(_ key: Key) -> Bool {
@@ -117,18 +138,30 @@ public class ThriftDecoder: Decoder {
         }
     }
 
-    private struct UnkeyedContainer: UnkeyedDecodingContainer, SingleValueDecodingContainer {
+    fileprivate class UnkeyedContainer: UnkeyedDecodingContainer, SingleValueDecodingContainer {
         var decoder: ThriftDecoder
 
         var codingPath: [CodingKey] { return [] }
 
-        var count: Int? { return nil }
+        var count: Int? {
+            switch decoder.value {
+            case .keyedCollection(let collection):
+                return collection.count
+            case .unkeyedCollection(let collection):
+                return collection.count
+            default: return nil
+            }
+        }
 
-        var currentIndex: Int { return 0 }
+        var currentIndex: Int = 0
 
-        var isAtEnd: Bool { return false }
+        var isAtEnd: Bool { return currentIndex == count }
 
-        mutating func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type) throws -> KeyedDecodingContainer<NestedKey> where NestedKey : CodingKey {
+        init(decoder: ThriftDecoder) {
+            self.decoder = decoder
+        }
+
+        func nestedContainer<NestedKey>(keyedBy type: NestedKey.Type) throws -> KeyedDecodingContainer<NestedKey> where NestedKey : CodingKey {
             return try decoder.container(keyedBy: type)
         }
 
@@ -141,7 +174,30 @@ public class ThriftDecoder: Decoder {
         }
 
         func decode<T>(_ type: T.Type) throws -> T where T : Decodable {
-            return try decoder.decodeType(type: type)
+            let value: ThriftObject
+            if case .keyedCollection(let collection) = decoder.value {
+                value = collection.value[currentIndex].value
+            } else if case .unkeyedCollection(let collection) = decoder.value {
+                value = collection.value[currentIndex]
+            } else if let decoderValue = self.decoder.value {
+                return try decoder.decodeType(type: type, value: decoderValue)
+            } else {
+                throw ThriftDecoderError.uninitializedDecodingData
+            }
+
+            return try decoder.decodeType(type: type, value: value)
+        }
+
+        func decodeKey<T>(_ type: T.Type) throws -> T where T : Decodable {
+            guard case .keyedCollection(let collection) = decoder.value else {
+                throw ThriftDecoderError.keyOrderMismatch
+            }
+            let key = collection.value[currentIndex].key
+            return try decoder.decodeType(type: type, value: key)
+        }
+
+        func moveContainer() {
+            currentIndex += 1
         }
 
         func decodeNil() -> Bool {
@@ -151,29 +207,24 @@ public class ThriftDecoder: Decoder {
 }
 
 extension ThriftDecoder {
-    private func decode<T: Decodable, Key: CodingKey>(_ type: T.Type, forKey key: Key) throws -> T {
+    private func decode<T: Decodable, Key: CodingKey>(_ type: T.Type, forKey key: Key, previousFieldId: Int) throws -> T {
         self.codingPath.append(key)
         defer {
             self.codingPath.removeLast()
         }
 
-        guard let binary = self.binary else {
-            throw ThriftDecoderError.uninitializedDecodingData
-        }
+
         guard let keyId = key.intValue else {
             throw ThriftDecoderError.codingKeyMissingIntValue(key: key)
         }
-
-        let (fieldType, id) = try binary.readFieldMetadata()
-
-        if id != keyId {
-            if fieldType == .stop || id == nil {
-                return try decode(type, forKey: key)
-            }
+        guard case .struct(let object) = self.value else {
             throw ThriftDecoderError.keyOrderMismatch
         }
+        guard let value = object.fields[keyId] else {
+            throw ThriftDecoderError.unexpectedlyFoundNil
+        }
 
-        return try decodeType(type: type)
+        return try decodeType(type: type, value: value.data)
     }
 
     private func isNull<Key: CodingKey>(forKey key: Key) throws -> Bool {
@@ -181,53 +232,43 @@ extension ThriftDecoder {
             throw ThriftDecoderError.codingKeyMissingIntValue(key: key)
         }
 
-        let (_, id) = try readFieldAndId()
-        return (id != keyId)
+        guard case .struct(let object) = self.value else {
+            throw ThriftDecoderError.keyOrderMismatch
+        }
+
+        return object.fields[keyId] == nil
     }
 
-    fileprivate func readFieldAndId() throws -> (ThriftType, Int?) {
-        guard let binary = self.binary else {
-            throw ThriftDecoderError.uninitializedDecodingData
-        }
-
-        let (fieldType, id) = try binary.readFieldMetadata()
-
-        if fieldType == .stop {
-            binary.moveReadCursorBackAfterType()
-        } else {
-            binary.moveReadCursorBackAfterTypeAndFieldID()
-        }
-
-        return (fieldType, id)
-    }
-
-    private func decodeType<T: Decodable>(type: T.Type) throws -> T {
-        guard let binary = self.binary else {
-            throw ThriftDecoderError.uninitializedDecodingData
-        }
-
+    private func decodeType<T: Decodable>(type: T.Type, value: ThriftObject) throws -> T {
         let decoded: T?
-
-        switch type {
-        case is Bool.Type:
-            decoded = try binary.readBool() as? T
-        case is Data.Type:
-            decoded = try binary.readBinary() as? T
-        case is Double.Type:
-            decoded = try binary.readDouble() as? T
-        case is UInt8.Type:
-            decoded = try binary.readByte() as? T
-        case is Int16.Type:
-            decoded = try binary.readInt16() as? T
-        case is Int32.Type:
-            decoded = try binary.readInt32() as? T
-        case is Int64.Type:
-            decoded = try binary.readInt64() as? T
-        case is String.Type:
-            decoded = try binary.readString() as? T
-        case let thriftDecodable as ThriftDecodable.Type:
-            decoded = try thriftDecodable.init(fromThrift: self) as? T
-        default:
+        if let thriftDecodable = type as? ThriftDecodable.Type {
+            decoded = try thriftDecodable.init(fromThrift: ThriftDecoder(value: value, specification: self.specification)) as? T
+        } else if case .data(let data) = value {
+            let binary = self.specification == .compact ? ThriftCompactBinary(data: data) : ThriftBinary(data: data)
+            switch type {
+            case is Bool.Type:
+                decoded = try binary.readBool() as? T
+            case is Data.Type:
+                decoded = data as? T
+            case is Double.Type:
+                decoded = try binary.readDouble() as? T
+            case is UInt8.Type:
+                decoded = try binary.readByte() as? T
+            case is Int16.Type:
+                decoded = try binary.readInt16() as? T
+            case is Int32.Type:
+                decoded = try binary.readInt32() as? T
+            case is Int64.Type:
+                decoded = try binary.readInt64() as? T
+            case is String.Type:
+                guard let string = String(bytes: data, encoding: .utf8) else {
+                    throw ThriftDecoderError.nonUTF8StringData(data)
+                }
+                decoded = string as? T
+            default:
+                decoded = nil
+            }
+        } else {
             decoded = nil
         }
 
@@ -242,49 +283,41 @@ extension ThriftDecoder {
 
 extension Dictionary : ThriftDecodable where Key: Decodable, Value: Decodable {
     public init(fromThrift decoder: ThriftDecoder) throws {
-        guard let binary = decoder.binary else {
-            throw ThriftDecoderError.uninitializedDecodingData
-        }
-        let (_, _, size) = try binary.readMapMetadata()
-        var container = try decoder.unkeyedContainer()
-        self.init(minimumCapacity: size)
+        let container = try decoder.thriftCollectionContainer()
+        let size = container.count ?? 0
+        self.init(minimumCapacity: container.count ?? 0)
         for _ in 0..<size {
-            let key = try container.decode(Key.self)
+            let key = try container.decodeKey(Key.self)
             let value = try container.decode(Value.self)
             self[key] = value
+            container.moveContainer()
         }
     }
 }
 
 extension Set: ThriftDecodable where Element: Decodable {
     public init(fromThrift decoder: ThriftDecoder) throws {
-        guard let binary = decoder.binary else {
-            throw ThriftDecoderError.uninitializedDecodingData
-        }
-
-        let (_, size) = try binary.readSetMetadata()
-        var container = try decoder.unkeyedContainer()
+        let container = try decoder.thriftCollectionContainer()
+        let size = container.count ?? 0
         self.init(minimumCapacity: Int(size))
         for _ in 0..<size {
             let value = try container.decode(Element.self)
             self.insert(value)
+            container.moveContainer()
         }
     }
 }
 
 extension Array: ThriftDecodable where Element: Decodable {
     public init(fromThrift decoder: ThriftDecoder) throws {
-        guard let binary = decoder.binary else {
-            throw ThriftDecoderError.uninitializedDecodingData
-        }
-
-        let (_, size) = try binary.readListMetadata()
-        var container = try decoder.unkeyedContainer()
+        let container = try decoder.thriftCollectionContainer()
+        let size = container.count ?? 0
         self.init()
         self.reserveCapacity(Int(size))
         for _ in 0..<size {
             let value = try container.decode(Element.self)
             self.append(value)
+            container.moveContainer()
         }
     }
 }

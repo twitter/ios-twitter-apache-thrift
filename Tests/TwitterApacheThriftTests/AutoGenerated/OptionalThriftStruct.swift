@@ -9,8 +9,9 @@ import TwitterApacheThrift
 
 public struct OptionalThriftStruct: ThriftCodable, Equatable {
   let int16Value: Int16?
-
+  let someBool: Bool
   enum CodingKeys: Int, CodingKey {
     case int16Value = 1
+    case someBool = 2
   }
 }

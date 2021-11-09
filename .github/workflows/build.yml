@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - name: SwiftPM Build
-        run: swift test --enable-test-discovery
+        run: swift test
   test-iOS:
     runs-on: macOS-latest
     steps:
@@ -28,4 +28,4 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - name: SwiftPM Build
-        run: swift test --enable-test-discovery
+        run: swift test

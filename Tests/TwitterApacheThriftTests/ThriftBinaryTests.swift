@@ -324,25 +324,3 @@ class ThriftBinaryTests: XCTestCase {
         XCTAssertTrue(didThrow)
     }
 }
-
-#if !canImport(ObjectiveC)
-extension ThriftBinaryTests {
-    static var allTests : [(String, ((ThriftBinaryTests) -> () throws -> Void))] {
-        return [
-            ("testReadInt32", testReadInt32),
-            ("testReadInt64", testReadInt64),
-            ("testReadInt16", testReadInt16),
-            ("testReadByte", testReadByte),
-            ("testReadDouble", testReadDouble),
-            ("testReadString", testReadString),
-            ("testReadBinary", testReadBinary),
-            ("testReadBool", testReadBool),
-            ("testReadMapMetadata", testReadMapMetadata),
-            ("testReadSetMetadata", testReadSetMetadata),
-            ("testReadListMetadata", testReadListMetadata),
-            ("testReadFieldMetadata", testReadFieldMetadata),
-            ("testOverflowRead", testOverflowRead)
-        ]
-    }
-}
-#endif

@@ -11,7 +11,7 @@
 
 import Foundation
 
-/// A class for writing values to thift data
+/// A class for writing values to thrift data
 class MutableThriftBinary: ThriftBinary {
 
     /// The buffer for writing
@@ -34,12 +34,9 @@ class MutableThriftBinary: ThriftBinary {
         writingBuffer.write(data: data)
     }
 
-    fileprivate func insert(bytes: [UInt8]) {
+    func insert(bytes: [UInt8]) {
         writingBuffer.write(bytes: bytes)
     }
-}
-
-extension MutableThriftBinary {
 
     /// Writes a bool to the buffer
     /// - Parameter value: The value to write
@@ -134,8 +131,7 @@ extension MutableThriftBinary {
     ///   - elementType: The thrift type of values
     ///   - count: The amount of values
     func writeSetMetadata(elementType: ThriftType, count: Int) {
-      self.write(elementType.rawValue)
-      self.write(Int32(count))
+        self.writeListMetadata(elementType: elementType, count: count)
     }
 
     /// Writes the a list (aka Array) metadata to the buffer
@@ -151,7 +147,7 @@ extension MutableThriftBinary {
     /// - Parameters:
     ///   - fieldType: The field type
     ///   - fieldID: The identifier of the field
-    func writeFieldBegin(fieldType: ThriftType, fieldID: Int) {
+    func writeFieldBegin(fieldType: ThriftType, fieldID: Int, previousId: Int) {
       self.write(fieldType.rawValue)
       self.write(Int16(fieldID))
     }

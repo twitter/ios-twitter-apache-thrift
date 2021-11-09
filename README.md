@@ -25,7 +25,7 @@ github "twitter/ios-twitter-apache-thrift"
 
 #### Encoding and Decoding
 The thrift encoder and decoder use the Encoder and Decoder protocols. Conforming
-to these protocols allows the compiler to autogenerate the codeable methods. This 
+to these protocols allows the compiler to autogenerate the codable methods. This 
 reduces the potential for errors; they also receive JSON support for free. The 
 implementation of these models deviate from the official thrift specification. The 
 official specification was designed for languages without automatic encoding and 
@@ -87,13 +87,13 @@ Encoding and decoding use the ThriftEncoder and ThriftDecoder. The usage
 will be like the following.
 ```
 //Encoder
-let thrift = SomeThriftEncodeable()
+let thrift = SomeThriftEncodable()
 let encoder = ThriftEncoder()
 let data = try thriftEncoder.encode(thrift)
 
 //Decoder
 let decoder = ThriftDecoder()
-let thriftObject = try decoder.decode(SomeThriftEncodeable.self, from: thriftData)
+let thriftObject = try decoder.decode(SomeThriftEncodable.self, from: thriftData)
 ```
 #### Type Mapping
 Mappings between foundation Swift types to thrift types handled by the library. 

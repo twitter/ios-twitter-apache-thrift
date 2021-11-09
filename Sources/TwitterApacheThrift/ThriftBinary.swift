@@ -11,11 +11,11 @@
 
 import Foundation
 
-/// A class for reading values from thift data
+/// A class for reading values from thrift data
 class ThriftBinary {
 
     /// The buffer for holding the thrift data
-    private let readingBuffer: MemoryBuffer
+    let readingBuffer: MemoryBuffer
 
     /// Initialize BinaryProtocol class with data
     /// - Parameter data: The thrift data for reading
@@ -33,9 +33,62 @@ class ThriftBinary {
         moveReadCursorBackAfterType()
         readingBuffer.moveOffset(by: -(Int16.bitWidth / 8))
     }
-}
 
-extension ThriftBinary {
+    func readThrift(type: ThriftType) throws -> ThriftObject {
+        return try readValue(index: nil, type: type)
+    }
+
+    func readStruct(index: Int?) throws -> ThriftStruct {
+        var fields: [Int: ThriftValue] = [:]
+        var nextField = try readFieldMetadata()
+        while nextField.type != .stop, let id = nextField.id {
+            let value = try readValue(index: id, type: nextField.type)
+            fields[id] = ThriftValue(index: id, type: nextField.type, data: value)
+            nextField = try readFieldMetadata()
+        }
+        return ThriftStruct(index: index, fields: fields)
+    }
+
+    func readValue(index: Int?, type: ThriftType, isCollection: Bool = false) throws -> ThriftObject {
+        switch type {
+        case .bool, .byte:
+            return .data(try Data([readByte()]))
+        case .double, .int64:
+            return .data(try readingBuffer.read(size: 8))
+        case .int16:
+            return .data(try readingBuffer.read(size: 2))
+        case .int32:
+            return .data(try readingBuffer.read(size: 4))
+        case .string:
+            return .data(try readBinary())
+        case .structure:
+            return .struct(try readStruct(index: index))
+        case .map:
+            var values: [ThriftKeyedCollection.Value] = []
+            let metadata = try readMapMetadata()
+            for _ in 0..<metadata.size {
+                let key = try readValue(index: nil, type: metadata.keyType)
+                let value = try readValue(index: nil, type: metadata.valueType)
+                values.append(.init(key: key, value: value))
+            }
+            return .keyedCollection(ThriftKeyedCollection(index: index,
+                                                          count: metadata.size,
+                                                          keyType:metadata.keyType,
+                                                          elementType: metadata.valueType,
+                                                          value: values))
+        case .list, .set:
+            var values: [ThriftObject] = []
+            let metadata = try readListMetadata()
+            for _ in 0..<metadata.size {
+                let value = try readValue(index: nil, type: metadata.elementType)
+                values.append(value)
+            }
+            return .unkeyedCollection(ThriftUnkeyedCollection(index: index, count: metadata.size, elementType: type, value: values))
+        default:
+            return .stop
+        }
+
+    }
 
     /// Reads the next UInt64 from the thrift
     /// - Throws: ThriftDecoderError.readBufferOverflow when trying to read outside the range of data
@@ -110,8 +163,7 @@ extension ThriftBinary {
     /// - Throws: ThriftDecoderError.nonUTF8StringData when the string data is not a UTF8 string
     /// - Returns: The value decoded from the thrift
     func readString() throws -> String {
-        let size = try readInt32()
-        let stringData = try readingBuffer.read(size: Int(size))
+        let stringData = try readBinary()
 
         guard let string = String(bytes: stringData, encoding: .utf8) else {
             throw ThriftDecoderError.nonUTF8StringData(stringData)

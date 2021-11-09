@@ -45,8 +45,18 @@ public class ThriftEncoder: Encoder {
 
     public var userInfo: [CodingUserInfoKey : Any] = [:]
 
+    fileprivate var previousId: Int = 0
+
+    /// The specification to be used for encoding
+    public var specification: ThriftSpecification = .standard
+
     /// Initializes `self` with defaults.
     public init() {}
+
+    fileprivate init(binary: MutableThriftBinary?, specification: ThriftSpecification) {
+        self.binary = binary
+        self.specification = specification
+    }
 
     /// Encodes the given top-level value and returns its Thrift representation.
     ///
@@ -54,9 +64,10 @@ public class ThriftEncoder: Encoder {
     /// - returns: A new `Data` value containing the encoded Thrift data.
     /// - throws: `ThriftEncoderError` An error if any value throws an error during encoding.
     public func encode<T>(_ value: T) throws -> Data where T: ThriftEncodable {
-        let binary = MutableThriftBinary()
+        let binary = specification == .compact ? MutableThriftCompactBinary() : MutableThriftBinary()
         self.binary = binary
         try value.thriftEncode(to: self)
+        self.previousId = 0
         return binary.getBuffer()
     }
 
@@ -142,10 +153,21 @@ extension ThriftEncoder {
             throw ThriftEncoderError.codingKeyMissingIntValue(key: key)
         }
 
-        let thriftType = try ThriftType.type(from: value)
+        let thriftType: ThriftType
+        //Bools are encoded as part of the type
+        if let boolValue = value as? Bool, specification == .compact {
+            thriftType = boolValue ? .void : .bool
+        } else {
+            thriftType = try ThriftType.type(from: value)
+        }
 
-        binary.writeFieldBegin(fieldType: thriftType, fieldID: keyId)
-        try encodeValue(value)
+        binary.writeFieldBegin(fieldType: thriftType, fieldID: keyId, previousId: self.previousId)
+
+        if (specification == .compact && thriftType != .bool && thriftType != .void) || specification != .compact {
+            try encodeValue(value)
+        }
+
+        previousId = keyId
     }
 
     private func encodeValue<T>(_ value: T) throws where T : Encodable {
@@ -171,7 +193,7 @@ extension ThriftEncoder {
         case let v as String:
             binary.write(v)
         case let v as ThriftEncodable:
-            try v.thriftEncode(to: self)
+            try v.thriftEncode(to: ThriftEncoder(binary: self.binary, specification: self.specification))
         default:
             throw ThriftEncoderError.unencodableType(type: value.self)
         }

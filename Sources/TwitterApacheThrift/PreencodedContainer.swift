@@ -12,7 +12,7 @@
 import Foundation
 
 /// A container allowing pre-encoded data to be placed in the encoding
-/// buffer insted of a value
+/// buffer instead of a value
 ///
 /// For example the first struct would take .encodedData([0, 57]) and
 /// this would allow the second struct to be decoded with a value of 57

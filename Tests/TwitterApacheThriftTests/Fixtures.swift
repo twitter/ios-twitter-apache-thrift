@@ -13,8 +13,8 @@ import Foundation
 import TwitterApacheThrift
 
 extension OptionalThriftStruct {
-    func with(int16Value: Int16?? = .some(nil)) -> OptionalThriftStruct {
-        return OptionalThriftStruct(int16Value: int16Value.flatMap({ $0 ?? self.int16Value }))
+    func with(int16Value: Int16?? = .some(nil), someBool: Bool? = nil) -> OptionalThriftStruct {
+        return OptionalThriftStruct(int16Value: int16Value.flatMap({ $0 ?? self.int16Value }), someBool: someBool ?? self.someBool)
     }
 }
 
@@ -41,7 +41,7 @@ enum Fixtures {
                                                                int64Value: 100293,
                                                                stringValue: "some string")
 
-    static var optionalThriftStruct =  OptionalThriftStruct(int16Value: 12)
+    static var optionalThriftStruct =  OptionalThriftStruct(int16Value: 12, someBool: true)
 
     static var subobjectThriftStruct = SubobjectThriftStruct(value: Fixtures.optionalThriftStruct, intValue: 50)
 

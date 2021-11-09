@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 //
 // Copyright 2020 Twitter, Inc.
@@ -16,7 +16,7 @@ let package = Package(
     products: [
         .library(
             name: "TwitterApacheThrift",
-            type: .dynamic,
+            type: .static,
             targets: [
                 "TwitterApacheThrift"
             ]

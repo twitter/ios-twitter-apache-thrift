@@ -1,87 +1,88 @@
-// Copyright 2020 Twitter, Inc.
+// Copyright 2021 Twitter, Inc.
 // Licensed under the Apache License, Version 2.0
 // http://www.apache.org/licenses/LICENSE-2.0
 //
-//  ThriftEncoderTests.swift
+//  ThriftEncoderCompactTests.swift
 //  TwitterApacheThriftTests
 //
-//  Created on 3/25/20.
-//  Copyright © 2020 Twitter. All rights reserved.
+//  Created on 9/29/21.
+//  Copyright © 2021 Twitter. All rights reserved.
 //
 
 import Foundation
 import XCTest
 @testable import TwitterApacheThrift
 
-class ThriftEncoderTests: XCTestCase {
+class ThriftCompactEncoderTests: XCTestCase {
 
     var thriftEncoder: ThriftEncoder!
 
     override func setUp() {
         self.thriftEncoder = ThriftEncoder()
+        self.thriftEncoder.specification = .compact
         super.setUp()
     }
 
     func testEncodeFoundationTypes() throws {
         let value = Fixtures.foundationThriftStruct
         let data = try thriftEncoder.encode(value)
-        XCTAssertEqual(data.base64EncodedString(), "AgABAAQAAj/zvnbItDlYBgADAIAIAAQAAAAXCgAFAAAAAAABh8ULAAYAAAALc29tZSBzdHJpbmcA")
+        XCTAssertEqual(data.base64EncodedString(), "EhdYObTIdr7zPxSAAhUuFoqfDBgLc29tZSBzdHJpbmcA")
     }
 
     func testOptionalTypes() throws {
         let data = try thriftEncoder.encode(Fixtures.optionalThriftStruct)
-        XCTAssertEqual(data.base64EncodedString(), "BgABAAwCAAIBAA==")
+        XCTAssertEqual(data.base64EncodedString(), "FBgRAA==")
 
         let dataWithNil = try thriftEncoder.encode(Fixtures.optionalThriftStruct.with(int16Value: nil))
-        XCTAssertEqual(dataWithNil.base64EncodedString(), "AgACAQA=")
+        XCTAssertEqual(dataWithNil.base64EncodedString(), "IQA=")
     }
 
     func testStructsTypes() throws {
         let data = try thriftEncoder.encode(Fixtures.subobjectThriftStruct)
-        XCTAssertEqual(data.base64EncodedString(), "DAABBgABAAwCAAIBAAYAAgAyAA==")
+        XCTAssertEqual(data.base64EncodedString(), "HBQYEQAUZAA=")
 
         let dataWithNil = try thriftEncoder.encode(Fixtures.subobjectThriftStruct.with(value: nil))
-        XCTAssertEqual(dataWithNil.base64EncodedString(), "BgACADIA")
+        XCTAssertEqual(dataWithNil.base64EncodedString(), "JGQA")
 
         let dataWithNilInSubObject = try thriftEncoder.encode(Fixtures.subobjectThriftStruct.with(value: Fixtures.optionalThriftStruct.with(int16Value: nil)))
-        XCTAssertEqual(dataWithNilInSubObject.base64EncodedString(), "DAABAgACAQAGAAIAMgA=")
+        XCTAssertEqual(dataWithNilInSubObject.base64EncodedString(), "HCEAFGQA")
     }
 
     func testCollections() throws {
         let data = try thriftEncoder.encode(Fixtures.collectionThriftStruct)
-        XCTAssertEqual(data.base64EncodedString(), "DwABBAAAAAI/8ZmZmZmZmkABmZmZmZmaDQACCwsAAAABAAAAAWEAAAAEYXNkZg4AAwgAAAABAAAAAQA=")
+        XCTAssertEqual(data.base64EncodedString(), "GSeamZmZmZnxP5qZmZmZmQFAGwGIAWEEYXNkZhoVAgA=")
 
         let dataWithEmptyCollections = try thriftEncoder.encode(Fixtures.collectionThriftStruct.with(arrays: [], maps: [:], sets: []))
-        XCTAssertEqual(dataWithEmptyCollections.base64EncodedString(), "DwABBAAAAAANAAILCwAAAAAOAAMIAAAAAAA=")
+        XCTAssertEqual(dataWithEmptyCollections.base64EncodedString(), "GQcbABoFAA==")
 
         let dataWithArray = try thriftEncoder.encode(Fixtures.collectionThriftStruct.with(maps: nil, sets: nil))
-        XCTAssertEqual(dataWithArray.base64EncodedString(), "DwABBAAAAAI/8ZmZmZmZmkABmZmZmZmaAA==")
+        XCTAssertEqual(dataWithArray.base64EncodedString(), "GSeamZmZmZnxP5qZmZmZmQFAAA==")
 
         let dataWithMap = try thriftEncoder.encode(Fixtures.collectionThriftStruct.with(arrays: nil, sets: nil))
-        XCTAssertEqual(dataWithMap.base64EncodedString(), "DQACCwsAAAABAAAAAWEAAAAEYXNkZgA=")
+        XCTAssertEqual(dataWithMap.base64EncodedString(), "KwGIAWEEYXNkZgA=")
 
         let dataWithSet = try thriftEncoder.encode(Fixtures.collectionThriftStruct.with(arrays: nil, maps: nil))
-        XCTAssertEqual(dataWithSet.base64EncodedString(), "DgADCAAAAAEAAAABAA==")
+        XCTAssertEqual(dataWithSet.base64EncodedString(), "OhUCAA==")
     }
 
     func testUnions() throws {
         let unionA = UnionStruct(someUnion: .unionClassA(UnionClassA(someString: "string")))
         let dataA = try thriftEncoder.encode(unionA)
-        XCTAssertEqual(dataA.base64EncodedString(), "DAABDAABCwABAAAABnN0cmluZwAAAA==")
+        XCTAssertEqual(dataA.base64EncodedString(), "HBwYBnN0cmluZwAAAA==")
 
         let unionB = UnionStruct(someUnion: .unionClassB(UnionClassB(someInt: 123)))
         let dataB = try thriftEncoder.encode(unionB)
-        XCTAssertEqual(dataB.base64EncodedString(), "DAABDAACCgABAAAAAAAAAHsAAAA=")
+        XCTAssertEqual(dataB.base64EncodedString(), "HCwW9gEAAAA=")
     }
 
     func testEnums() throws {
         let enumA = EnumStruct(enumValue: .AAA)
         let dataA = try thriftEncoder.encode(enumA)
-        XCTAssertEqual(dataA.base64EncodedString(), "CAABAAAAAQA=")
+        XCTAssertEqual(dataA.base64EncodedString(), "FQIA")
 
         let enumB = EnumStruct(enumValue: .BBB)
         let dataB = try thriftEncoder.encode(enumB)
-        XCTAssertEqual(dataB.base64EncodedString(), "CAABAAAAAgA=")
+        XCTAssertEqual(dataB.base64EncodedString(), "FQQA")
     }
 
     func testEncodingUnencodableType() {
@@ -97,6 +98,6 @@ class ThriftEncoderTests: XCTestCase {
 
     func testDataEncoding() throws {
         let data = try thriftEncoder.encode(Fixtures.dataStruct)
-        XCTAssertEqual(data.base64EncodedString(), "CwABAAAABHRlc3QDAAIFAA==")
+        XCTAssertEqual(data.base64EncodedString(), "GAR0ZXN0EwUA")
     }
 }

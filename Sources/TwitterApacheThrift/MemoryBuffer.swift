@@ -15,7 +15,7 @@ import Foundation
 class MemoryBuffer {
 
     /// The thrift data buffer
-    fileprivate var buffer: Data
+    var buffer: Data
 
     /// The offset of read cursor
     private var offset: Int = 0
@@ -41,7 +41,7 @@ class MemoryBuffer {
     }
 
     /// Moves the read cursor
-    /// - Parameter offset: The ammount of bytes to move the cursor. Positive for forward. Negative for backwards.
+    /// - Parameter offset: The amount of bytes to move the cursor. Positive for forward. Negative for backwards.
     func moveOffset(by offset: Int) {
         self.offset += offset
     }
