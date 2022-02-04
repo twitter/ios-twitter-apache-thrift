@@ -10,7 +10,7 @@ allows the client and backend to use a common model for representing data.
 #### Swift Package Manager
 Add the following to your Package.swift file
 
-```
+```swift
 .package(name: "TwitterApacheThrift", url: "https://github.com/twitter/ios-twitter-apache-thrift", .upToNextMajor(from: "1.0.0"))
 ```
 
@@ -32,7 +32,7 @@ official specification was designed for languages without automatic encoding and
 decoding. Output and input binary will be up to the official thrift specification. There 
 is ThriftEncodable and ThriftDecodable protocols that confirm the respective swift 
 protocols. There is also a typealias combining them for convenience.
- ```
+ ```swift
 public typealias ThriftCodable = ThriftDecodable & ThriftEncodable
 
 /// A protocol for types which can be encoded from thrift.
@@ -85,7 +85,7 @@ public protocol ThriftDecodable: Decodable {
 ```
 Encoding and decoding use the ThriftEncoder and ThriftDecoder. The usage 
 will be like the following.
-```
+```swift
 //Encoder
 let thrift = SomeThriftEncodable()
 let encoder = ThriftEncoder()
@@ -123,7 +123,7 @@ For supported collection types, we have extensions to support the ThriftCodable
 protocol. Thrift structs map to Swift structs. Swift structs are value types. These
 prevent misuse of the models and unexpected behavior. Structs add field ids as 
 coding keys on the structs, shown here:
-```
+```swift
 /// ClassA.thrift
 struct ClassA {
   1: required string someString
@@ -142,7 +142,7 @@ Thrift enums will be a Swift Enum with a Int32 raw value per the thrift specific
 Unions will also be created as enums and will also contain coding keys for the field
 ids. Unions are mutually exclusive types, making them as enums is ideal to prevent 
 misuse of the model. Here is an example:
-```
+```swift
 /// MyUnion.thrift
 union MyUnion {
   1: UnionClassA unionCase1
