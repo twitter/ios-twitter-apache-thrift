@@ -1,0 +1,28 @@
+on: pull_request
+name: Test
+jobs:
+  test-macOS:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@main
+      - name: SwiftPM Build
+        run: swift test
+  test-iOS:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@main
+      - name: xcodebuild
+        run: |-
+          xcodebuild \
+            -scheme "TwitterApacheThrift" \
+            -destination "platform=iOS Simulator,OS=latest,name=iPhone 11 Pro Max" \
+            -quiet \
+            build test
+  test-linux:
+    runs-on: ubuntu-latest
+    container:
+      image: swift:5.5
+    steps:
+      - uses: actions/checkout@main
+      - name: SwiftPM Build
+        run: swift test
