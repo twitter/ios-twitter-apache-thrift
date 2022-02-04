@@ -160,7 +160,9 @@ public enum MyUnion: ThriftCodable {
   }
 }
 ```
-
+## Documentation
+ https://twitter.github.io/ios-twitter-apache-thrift
+ 
 ## Support
 
 Create a [new issue](https://github.com/twitter/ios-twitter-apache-thrift/issues/new) on GitHub.
