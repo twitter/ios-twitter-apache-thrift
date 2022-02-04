@@ -27,7 +27,7 @@ url: "https://twitter.github.io" # the base hostname & protocol for your site, e
 source: "site/"
 
 # Build settings
-theme: minima
+#theme: minima
 #plugins:
 #  - jekyll-feed
 
