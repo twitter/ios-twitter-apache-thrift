@@ -22,7 +22,7 @@ title: Twitter Apache Thrift
 email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   Swift’s modern model constructs allow a 1:1 mapping to Thrift. Swift with Thrift allows the client and backend to use a common model for representing data.
-baseurl: "/site" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://twitter.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 source: "site/"
 
